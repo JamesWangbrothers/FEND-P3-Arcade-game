@@ -3,7 +3,7 @@ var random_y = function() {
     var index = Math.floor((Math.random()) * 3);
     randomy = y_arrays[index];
     return randomy;
-}
+};
 // Enemies our player must avoid
 var Enemy = function() {
     // Variables applied to each of our instances go here,
@@ -26,17 +26,19 @@ Enemy.prototype.update = function(dt) {
     var speed = 100;
     this.x = this.x + dt * speed;
     if ((this.x < player.x + 70) && (this.x > player.x - 70) && (this.y == player.y)){
-        player = new Player;
-        if (score.win > 0) {
-            score.win--;
-        }
+        player = new Player();
+        // if (score.win > 0) {
+        //     score.win--;
+
+        // }
+        score.lose++;
     }
-};
+}
 
 // Draw the enemy on the screen, required method for game
 Enemy.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-};
+}
 
 // Now write your own player class
 // This class requires an update(), render() and
@@ -49,15 +51,15 @@ var Player = function() {
 
 Player.prototype.update = function(dt){
     if (this.y <= 0) {
-        player = new Player;
+        player = new Player();
         score.win++;
     }
-};
+}
 
 Player.prototype.render = function(){
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 
-};
+}
 
 Player.prototype.handleInput = function(keys){
     switch(keys) {
@@ -82,16 +84,14 @@ Player.prototype.handleInput = function(keys){
         }
         break;
     }
-};
+}
 
 //Update the Score
 var Score = function() {
     this.win = 0;
     this.lose = 0;
-    this.name = "Wei Han";
-}
-
-
+    this.name = "James";
+};
 
 Score.prototype.render = function() {
     ctx.font = "20px Arial";
@@ -101,17 +101,16 @@ Score.prototype.render = function() {
     ctx.fillText("Lose: " + this.lose,420,540);
 }
 
-var score = new Score;
-
+var score = new Score();
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
- var allEnemies = [];
+var allEnemies = [];
 
- var genallEnemies = function() {
-    var enemy = new Enemy;
+var genallEnemies = function() {
+    var enemy = new Enemy();
     allEnemies.push(enemy);
- }
+ };
 
  var updatedallEnemies = function() {
     if (allEnemies.length < 5) {
@@ -129,7 +128,7 @@ var score = new Score;
 
 setInterval(updatedallEnemies, 1000);
  
- var player = new Player;
+var player = new Player();
 
 
 // This listens for key presses and sends the keys to your
