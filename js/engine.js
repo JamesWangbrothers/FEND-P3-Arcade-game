@@ -97,6 +97,10 @@ var Engine = (function(global) {
         player.update();
     }
 
+    function updateGem(dt) {
+        gem.update();
+    }
+
     /* This function initially draws the "game level", it will then call
      * the renderEntities function. Remember, this function is called every
      * game tick (or loop of the game engine) because that's how games work -
@@ -152,7 +156,8 @@ var Engine = (function(global) {
         });
 
         player.render();
-        score.render();
+        scores.render();
+        gem.render();
     }
 
     /* This function does nothing but it could have been a good place to
@@ -172,7 +177,8 @@ var Engine = (function(global) {
         'images/water-block.png',
         'images/grass-block.png',
         'images/enemy-bug.png',
-        'images/char-boy.png'
+        'images/char-boy.png',
+        'images/Gem Blue.png'
     ]);
     Resources.onReady(init);
 
