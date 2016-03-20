@@ -1,7 +1,9 @@
+'use strict';
+
 var random_y = function() {
     var y_arrays = [60,140,220];
     var index = Math.floor((Math.random()) * 3);
-    randomy = y_arrays[index];
+    var randomy = y_arrays[index];
     return randomy;
 };
 // Enemies our player must avoid
@@ -114,7 +116,7 @@ var Gem = function(){
 
 Gem.prototype.update = function(dt) {
     if (this.y == player.y) {
-        gem = new Gem();
+        theGem = new Gem();
         scores.score++;
     }
 }
@@ -140,7 +142,7 @@ var genallEnemies = function() {
         genallEnemies();
         // console.log("array lenth" + allEnemies.length);
     }
-    for (index = 0; index < allEnemies.length; index++) {
+    for (var index = 0, len = allEnemies.length ; index < len; index++) {
             // console.log(allEnemies[index].x);
             if (allEnemies[index].x > 500) {
                 allEnemies[index].x = allEnemies[index].x - 600;
