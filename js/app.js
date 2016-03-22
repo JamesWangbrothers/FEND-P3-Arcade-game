@@ -29,10 +29,6 @@ Enemy.prototype.update = function(dt) {
     this.x = this.x + dt * speed;
     if ((this.x < player.x + 70) && (this.x > player.x - 70) && (this.y == player.y)){
         player = new Player();
-        // if (score.win > 0) {
-        //     score.win--;
-
-        // }
         scores.lose++;
     }
 }
@@ -53,7 +49,8 @@ var Player = function() {
 
 Player.prototype.update = function(dt){
     if (this.y <= 0) {
-        player = new Player();
+        
+        player.reset();
         scores.win++;
     }
 }
@@ -61,6 +58,11 @@ Player.prototype.update = function(dt){
 Player.prototype.render = function(){
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 
+}
+
+Player.prototype.reset = function(){
+    this.x = 200;
+    this.y = 300;
 }
 
 Player.prototype.handleInput = function(keys){
@@ -99,33 +101,12 @@ var Score = function() {
 Score.prototype.render = function() {
     ctx.font = "20px Arial";
     ctx.fillStyle = "white";
-    ctx.fillText("Name: " + this.name,310,495);
-    ctx.fillText("Win: " + this.win,310,520);
-    ctx.fillText("Lose: " + this.lose,310,545);
-    ctx.fillText("Score: " + this.score,310,570);
+    ctx.fillText("Name: " + this.name,310,500);
+    ctx.fillText("Win: " + this.win,310,525);
+    ctx.fillText("Lose: " + this.lose,310,550);
 }
 
 var scores = new Score();
-
-//Update the Gem
-var Gem = function(){
-    this.x = 200;
-    this.y = random_y();
-    this.sprite = 'images/Gem Blue.png';
-}
-
-Gem.prototype.update = function(dt) {
-    if (this.y == player.y) {
-        theGem = new Gem();
-        scores.score++;
-    }
-}
-
-Gem.prototype.render = function() {
-    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-}
-
-var gem = new Gem();
 
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
