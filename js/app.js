@@ -1,5 +1,7 @@
 'use strict';
 
+var TILE_HEIGHT = 80,
+    TILE_WIDTH = 100;
 //make the random variable to let enmey to show at random y position
 var random_y = function() {
     var y_arrays = [60,140,220];
@@ -24,7 +26,7 @@ Role.prototype.render = function() {
 // The image/sprite for our enemies, this uses
 // a helper we've provided to easily load images
 var Enemy = function() {
-    this.x = -100;
+    this.x = -TILE_WIDTH;
     this.y = random_y();
     this.sprite = 'images/enemy-bug.png';
 };
@@ -39,20 +41,24 @@ Enemy.prototype.update = function(dt) {
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for all computers.
     // Enemies our player must avoid
-    var speed = 100;
+    var speed = TILE_WIDTH;
     this.x = this.x + dt * speed;
+    this.checkCollision();
+};
+
+Enemy.prototype.checkCollision = function() {
     if ((this.x < player.x + 70) && (this.x > player.x - 70) && (this.y == player.y)){
         player = new Player();
         scores.lose++;
     }
-};
+}
 
 // Now write your own player class
 // This class requires an update(), render() and
 // a handleInput() method.
 var Player = function() {
-    this.x = 200;
-    this.y = 300;
+    this.x = 2*TILE_WIDTH;
+    this.y = 3*TILE_WIDTH;
     this.sprite = 'images/char-boy.png';
 };
 
@@ -61,36 +67,36 @@ Player.prototype = new Role();
 Player.prototype.update = function(dt){
     if (this.y <= 0) {
         
-        player.reset();
+        this.reset();
         scores.win++;
     }
 };
 
 Player.prototype.reset = function(){
-    this.x = 200;
-    this.y = 300;
+    this.x = 2*TILE_WIDTH;
+    this.y = 3*TILE_WIDTH;
 };
 
 Player.prototype.handleInput = function(keys){
     switch(keys) {
     case "up":
         if (this.y >= 60) {
-            this.y = this.y - 80;
+            this.y = this.y - TILE_HEIGHT;
         }
         break;
     case "down":
         if (this.y < 320) {
-            this.y = this.y + 80;
+            this.y = this.y + TILE_HEIGHT;
         }
         break;
     case "left":
         if (this.x > 0) {
-            this.x = this.x - 100;
+            this.x = this.x - TILE_WIDTH;
         }
         break;
     case "right":
         if (this.x < 400) {
-            this.x = this.x + 100;
+            this.x = this.x + TILE_WIDTH;
         }
         break;
     }
@@ -131,14 +137,14 @@ var updatedallEnemies = function() {
     }
     for (var index = 0, len = allEnemies.length ; index < len; index++) {
             // console.log(allEnemies[index].x);
-            if (allEnemies[index].x > 500) {
-                allEnemies[index].x = allEnemies[index].x - 600;
+            if (allEnemies[index].x > 5*TILE_WIDTH) {
+                allEnemies[index].x = allEnemies[index].x - 6*TILE_WIDTH;
                 allEnemies[index].y = random_y();
             }
     }
 };
 
-setInterval(updatedallEnemies, 1000);
+setInterval(updatedallEnemies, 10*TILE_WIDTH);
  
 var player = new Player();
 
