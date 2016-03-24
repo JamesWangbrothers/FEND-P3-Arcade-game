@@ -1,11 +1,3 @@
-<<<<<<< HEAD
-frontend-nanodegree-arcade-game
-===============================
-
-Students should use this [rubric](https://www.udacity.com/course/viewer/#!/c-nd001/l-2696458597/m-2687128535) for self-checking their submission.
-
-For detailed instructions on how to get started, check out this [guide](https://docs.google.com/document/d/1v01aScPjSWCCWQLIpFqvg3-vXLH2e8_SZQKC8jNO0Dc/pub?embedded=true).
-=======
 # FEND-P3-Arcade-game
 
 ## Basic Functionality
@@ -34,4 +26,4 @@ Anything else you like!
 3. using "up", "down", "left" and "right" arrow key to control the movement of the player to across the road to reach the water on the other side
 4. when you collide the enemy, you lose; if you walk through the enemies and reach the river on the other side, you win.
 
-
+For detailed instructions on how to get started, check out this [guide](https://docs.google.com/document/d/1v01aScPjSWCCWQLIpFqvg3-vXLH2e8_SZQKC8jNO0Dc/pub?embedded=true).
