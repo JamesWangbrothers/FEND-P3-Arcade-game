@@ -1,42 +1,51 @@
 'use strict';
 
+//make the random variable to let enmey to show at random y position
 var random_y = function() {
     var y_arrays = [60,140,220];
     var index = Math.floor((Math.random()) * 3);
     var randomy = y_arrays[index];
     return randomy;
 };
-// Enemies our player must avoid
-var Enemy = function() {
-    // Variables applied to each of our instances go here,
-    // we've provided one for you to get started
 
-    // The image/sprite for our enemies, this uses
-    // a helper we've provided to easily load images
+//construct Parent Role
+var Role = function(x,y,sprite) {
+    this.x = x;
+    this.y = y;
+    this.sprite = sprite;
+};
+
+//Draw the enemy and player on the screen, required method for game
+Role.prototype.render = function() {
+    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+};
+
+// Construct children and variables applied to each of our instances go here
+// The image/sprite for our enemies, this uses
+// a helper we've provided to easily load images
+var Enemy = function() {
     this.x = -100;
     this.y = random_y();
     this.sprite = 'images/enemy-bug.png';
-     
 };
 
+//Replace Enemy.prototype with a new instance of Role
+Enemy.prototype = new Role();
+
+   
 // Update the enemy's position, required method for game
 // Parameter: dt, a time delta between ticks
 Enemy.prototype.update = function(dt) {
     // You should multiply any movement by the dt parameter
-    // which will ensure the game runs at the same speed for
-    // all computers.
+    // which will ensure the game runs at the same speed for all computers.
+    // Enemies our player must avoid
     var speed = 100;
     this.x = this.x + dt * speed;
     if ((this.x < player.x + 70) && (this.x > player.x - 70) && (this.y == player.y)){
         player = new Player();
         scores.lose++;
     }
-}
-
-// Draw the enemy on the screen, required method for game
-Enemy.prototype.render = function() {
-    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-}
+};
 
 // Now write your own player class
 // This class requires an update(), render() and
@@ -47,23 +56,20 @@ var Player = function() {
     this.sprite = 'images/char-boy.png';
 };
 
+Player.prototype = new Role();
+
 Player.prototype.update = function(dt){
     if (this.y <= 0) {
         
         player.reset();
         scores.win++;
     }
-}
-
-Player.prototype.render = function(){
-    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-
-}
+};
 
 Player.prototype.reset = function(){
     this.x = 200;
     this.y = 300;
-}
+};
 
 Player.prototype.handleInput = function(keys){
     switch(keys) {
@@ -88,7 +94,7 @@ Player.prototype.handleInput = function(keys){
         }
         break;
     }
-}
+};
 
 //Update the Score
 var Score = function() {
@@ -104,7 +110,7 @@ Score.prototype.render = function() {
     ctx.fillText("Name: " + this.name,310,500);
     ctx.fillText("Win: " + this.win,310,525);
     ctx.fillText("Lose: " + this.lose,310,550);
-}
+};
 
 var scores = new Score();
 
