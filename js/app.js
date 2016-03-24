@@ -83,7 +83,7 @@ Player.prototype.handleInput = function(keys){
         }
         break;
     case "right":
-        if (this.x < 400) {
+        if (this.x < 404) {
             this.x = this.x + 100;
         }
         break;
@@ -118,7 +118,7 @@ var genallEnemies = function() {
     allEnemies.push(enemy);
  };
 
- var updatedallEnemies = function() {
+var updatedallEnemies = function() {
     if (allEnemies.length < 5) {
         genallEnemies();
         // console.log("array lenth" + allEnemies.length);
@@ -127,7 +127,7 @@ var genallEnemies = function() {
             // console.log(allEnemies[index].x);
             if (allEnemies[index].x > 500) {
                 allEnemies[index].x = allEnemies[index].x - 600;
-                allEnemies[index].y = random_y();;
+                allEnemies[index].y = random_y();
             }
     }
 };

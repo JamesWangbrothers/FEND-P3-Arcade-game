@@ -24,7 +24,11 @@ Anything else you like!
 - **multiple vehicle types:** randomly passing different type of enemies for different speed. 
 - **timed games:** calculate and display the time one player spending on one game.
 
-## Steps to run and play the game
+## How to run the game
+1. clone the repository into your local computer
+2. open index.html in your browser
+
+## How to play the game
 1. choose your characters who you want to play with
 2. click 'start' button to start the game
 3. using "up", "down", "left" and "right" arrow key to control the movement of the player to across the road to reach the water on the other side
