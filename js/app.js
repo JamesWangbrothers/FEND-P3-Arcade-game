@@ -89,7 +89,7 @@ Player.prototype.handleInput = function(keys){
         }
         break;
     case "right":
-        if (this.x < 404) {
+        if (this.x < 400) {
             this.x = this.x + 100;
         }
         break;
